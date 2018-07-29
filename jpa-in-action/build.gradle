@@ -1,0 +1,74 @@
+buildscript {// buildscript prior to execute in the code block
+    // ext, used to define dynamic attributes, and customize the specific dependency version
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+        thymeleafVersion = '3.0.3.RELEASE'
+    }
+//    ext['thymeleaf.version'] = '3.0.3.RELEASE'
+
+    // use Maven center repository (also can use other repository)
+    repositories {
+        //	mavenCentral()
+        mavenLocal()
+        //	maven { url "https://repo.spring.io/snapshot" }
+        //	maven { url "https://repo.spring.io/milestone" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    }
+    // dependency declaration
+    dependencies {
+        // classpath declaration describe ClassLoader can use these dependencies while runing rest scripts.
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// use plugins
+apply plugin: 'java'
+apply plugin: 'eclipse'     // eclipse task tools
+apply plugin: 'idea'        // idea task tools
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+ext {
+    guavaVersion = '17.0'
+}
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        if (details.requested.group == 'org.gradle') {
+//            details.useVersion '1.4'
+//            details.because 'API breakage in higher versions'
+//        }
+//    }
+//}
+
+// specify the compiled file's version, by default package to jar.
+// specify the JDK version for compiling .java file
+sourceCompatibility = 1.8
+version = '1.0.0'
+group = 'org.tombear.spring.boot.blog'
+
+// By default use Maven reporsitory or other repository
+repositories {
+//	mavenCentral()
+    mavenLocal()
+//	maven { url "https://repo.spring.io/snapshot" }
+//	maven { url "https://repo.spring.io/milestone" }
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+// dependency relation
+dependencies {
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    // dependency used in compile step
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+    compile 'org.projectlombok:lombok:1.18.0'   // dependency used in test step
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.6' // enable response as XML format and don't need to modify entity
+//    compile "org.thymeleaf:thymeleaf:${thymeleafVersion}"
+
+    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    compile 'org.apache.httpcomponents:httpmime:4.5.2'
+    testCompile 'com.jayway.jsonpath:json-path:2.4.0'
+    testCompile 'com.jayway.jsonpath:json-path-assert:2.4.0'
+}
+
