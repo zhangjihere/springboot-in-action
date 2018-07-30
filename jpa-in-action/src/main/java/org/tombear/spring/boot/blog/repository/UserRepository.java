@@ -1,5 +1,6 @@
 package org.tombear.spring.boot.blog.repository;
 
+import org.springframework.data.repository.CrudRepository;
 import org.tombear.spring.boot.blog.domain.User;
 
 import java.util.List;
@@ -9,13 +10,6 @@ import java.util.List;
  *
  * @author tombear on 2018-07-29 13:23.
  */
-public interface UserRepository {
+public interface UserRepository extends CrudRepository<User, Long> {
 
-    User saveOrUpdateUser(User user);
-
-    void deleteUser(Long id);
-
-    User getUserById(Long id);
-
-    List<User> listUser();
 }
