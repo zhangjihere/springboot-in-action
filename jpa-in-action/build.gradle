@@ -52,6 +52,9 @@ dependencies {
     // dependency used in compile step
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-devtools") {
+        transitive = false  // don't transitive dependency
+    }
 
     compile 'org.projectlombok:lombok:1.18.0'   // dependency used in test step
     compile "com.google.guava:guava:${guavaVersion}"
