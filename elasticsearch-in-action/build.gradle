@@ -38,15 +38,15 @@ repositories {
 // dependency relation
 dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
-//     dependency used in compile step
     compile('org.springframework.boot:spring-boot-starter-web')
-//     dependency used in test step
-	compile 'org.projectlombok:lombok:1.18.0'
-//    enable response as XML format and don't need to modify entity
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.6'
+    compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
-    compile 'org.apache.httpcomponents:httpclient:4.3.3'
-    compile 'org.apache.httpcomponents:httpmime:4.3.3'
+//    enable response as XML format and don't need to modify entity
+//    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.6'
+    compile 'org.projectlombok:lombok:1.18.0'
+
+    compile 'org.apache.httpcomponents:httpclient:4.5.6'
+    compile 'org.apache.httpcomponents:httpmime:4.5.6'
     testCompile 'com.jayway.jsonpath:json-path:2.4.0'
     testCompile 'com.jayway.jsonpath:json-path-assert:2.4.0'
 }
