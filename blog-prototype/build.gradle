@@ -3,7 +3,7 @@ buildscript {// buildscript prior to execute in the code block
 
     ext { // ext, used to define dynamic attributes, and customize the specific dependency version
         springBootVersion = '2.0.4.RELEASE'
-        thymeleafVersion = '3.0.3.RELEASE'
+        thymeleafVersion = '3.0.9.RELEASE'
     }
 
     repositories { // use Maven center repository (also can use other repository)

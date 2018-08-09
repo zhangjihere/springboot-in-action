@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
  * @author tombear on 2018-07-24 21:59.
  */
 //@XmlRootElement
-@Data
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Data
 @Entity
 public class User {
     @Id
