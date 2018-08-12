@@ -1,0 +1,64 @@
+// from blog-user
+buildscript {// buildscript prior to execute in the code block
+
+    ext { // ext, used to define dynamic attributes, and customize the specific dependency version
+        springBootVersion = '2.0.4.RELEASE'
+        thymeleafVersion = '3.0.9.RELEASE'
+    }
+
+    repositories { // use Maven center repository (also can use other repository)
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    }
+
+    dependencies { // dependency declaration
+        // classpath declaration describe ClassLoader can use these dependencies while runing rest scripts.
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// use plugins
+apply plugin: 'java'
+apply plugin: 'eclipse'     // eclipse task tools
+apply plugin: 'idea'        // idea task tools
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+ext {
+    guavaVersion = '18.0'
+}
+
+// specify the compiled file's version, by default package to jar. Specify the JDK version for compiling .java file
+sourceCompatibility = 1.8
+version = '1.0.0'
+group = 'org.tombear.spring.boot.blog'
+
+repositories { // By default use Maven reporsitory or other repository
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+// dependency relation
+dependencies {
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-devtools") {
+        transitive = false  // don't transitive dependency
+    }
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE")
+    compile 'org.projectlombok:lombok:1.18.2'   // dependency used in test step
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile("org.apache.commons:commons-lang3:3.7")
+
+    compile("mysql:mysql-connector-java:8.0.12")
+    runtime("com.h2database:h2:1.4.197")
+
+    compile 'org.apache.httpcomponents:httpclient:4.5.6'
+    compile 'org.apache.httpcomponents:httpmime:4.5.6'
+    testCompile 'com.jayway.jsonpath:json-path:2.4.0'
+    testCompile 'com.jayway.jsonpath:json-path-assert:2.4.0'
+}
+
