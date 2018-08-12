@@ -1,8 +1,12 @@
 package org.tombear.spring.boot.blog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.tombear.spring.boot.blog.domain.User;
+import org.tombear.spring.boot.blog.service.UserService;
 
 /**
  * <P>
@@ -14,6 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class MainController {
+
+    private final UserService userService;
+
+    @Autowired
+    public MainController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public String root() {
@@ -39,6 +50,17 @@ public class MainController {
 
     @GetMapping("/register")
     public String register() {
+        System.out.println("MainController.register");
         return "register";
+    }
+
+    /**
+     * 注册用户
+     */
+    @PostMapping("/register")
+    public String registerUser(User user) {
+        System.out.println("MainController.registerUser");
+        userService.saveOrUpdateUser(user);
+        return "redirect:/login";
     }
 }
