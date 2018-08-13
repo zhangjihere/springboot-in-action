@@ -1,12 +1,18 @@
 package org.tombear.spring.boot.blog.controller;
 
+import com.google.common.collect.Lists;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.tombear.spring.boot.blog.domain.Authority;
 import org.tombear.spring.boot.blog.domain.User;
+import org.tombear.spring.boot.blog.service.AuthorityService;
 import org.tombear.spring.boot.blog.service.UserService;
+
+import java.util.List;
 
 /**
  * <P>
@@ -19,11 +25,15 @@ import org.tombear.spring.boot.blog.service.UserService;
 @Controller
 public class MainController {
 
+    private static final Long ROLE_USER_AUTHORITY_ID = 2L;   // 用户权限（博主）
+
     private final UserService userService;
+    private final AuthorityService authorityService;
 
     @Autowired
-    public MainController(UserService userService) {
+    public MainController(UserService userService, AuthorityService authorityService) {
         this.userService = userService;
+        this.authorityService = authorityService;
     }
 
     @GetMapping("/")
@@ -60,7 +70,10 @@ public class MainController {
     @PostMapping("/register")
     public String registerUser(User user) {
         System.out.println("MainController.registerUser");
-        userService.saveOrUpdateUser(user);
+        List<Authority> authorities = Lists.newArrayList();
+        authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID).orElse(null));
+        user.setUserAuthorities((authorities));
+        userService.registerUser(user);
         return "redirect:/login";
     }
 }

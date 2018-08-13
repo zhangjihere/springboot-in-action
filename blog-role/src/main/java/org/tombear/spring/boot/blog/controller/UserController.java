@@ -1,5 +1,7 @@
 package org.tombear.spring.boot.blog.controller;
 
+import com.google.common.collect.Lists;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.tombear.spring.boot.blog.domain.Authority;
 import org.tombear.spring.boot.blog.domain.User;
+import org.tombear.spring.boot.blog.service.AuthorityService;
 import org.tombear.spring.boot.blog.service.UserService;
 import org.tombear.spring.boot.blog.util.ConstraintViolationExceptionHandler;
 import org.tombear.spring.boot.blog.vo.Response;
@@ -33,10 +37,12 @@ import javax.validation.ConstraintViolationException;
 public class UserController {
 
     private final UserService userService;
+    private final AuthorityService authorityService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthorityService authorityService) {
         this.userService = userService;
+        this.authorityService = authorityService;
     }
 
     /**
@@ -65,7 +71,7 @@ public class UserController {
     @GetMapping("/add")
     public ModelAndView createForm(Model model) {
         System.out.println("UserController.createForm");
-        model.addAttribute("user", new User(null, null, null, null, null, ""));
+        model.addAttribute("user", new User(null, null, null, null, null, "", null));
         model.addAttribute("title", "创建用户");
         return new ModelAndView("users/add", "userModel", model);
     }
@@ -74,8 +80,12 @@ public class UserController {
      * 保存或修改用户
      */
     @PostMapping
-    public ResponseEntity<Response> saveOrUpdateUser(User user) {
+    public ResponseEntity<Response> saveOrUpdateUser(User user, Long authorityId) {
         System.out.println("UserController.saveOrUpdateUser");
+        List<Authority> authorities = Lists.newArrayList();
+        authorities.add(authorityService.getAuthorityById(authorityId).orElse(null));
+        user.setUserAuthorities(authorities);
+
         try {
             userService.saveOrUpdateUser(user);
         } catch (ConstraintViolationException e) {
