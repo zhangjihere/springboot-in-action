@@ -3,6 +3,7 @@
  *
  * @since: 1.0.0
  * @author Way Lau <https://waylau.com>
+ * @Modifier tombear
  */
 
 .tbpage-total-elements {
@@ -12,5 +13,6 @@
     margin-left: -1px;
     line-height: 1.25;
     color: #464a4c;
+    word-break: keep-all;
 }
 
