@@ -45,6 +45,7 @@ public class UserController {
         this.authorityService = authorityService;
     }
 
+
     /**
      * query all users
      */

@@ -12,7 +12,7 @@ import java.util.Optional;
  *
  * @author tombear on 2018-08-12 23:27.
  */
-@Service
+@Service("authorityServiceImpl")
 public class AuthorityServiceImpl implements AuthorityService {
 
     private final AuthorityRepository authorityRepository;
@@ -21,6 +21,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     public AuthorityServiceImpl(AuthorityRepository authorityRepository) {
         this.authorityRepository = authorityRepository;
     }
+
 
     @Override
     public Optional<Authority> getAuthorityById(Long id) {
