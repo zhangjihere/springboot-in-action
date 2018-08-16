@@ -72,23 +72,23 @@
             <div sec:authorize="isAuthenticated()" class="row">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="/u/tombear"
-                       th:href="@{'/u/' + ${#authentication.principal.username}}" data-toggle="dropdown">
-                        <span class="text-white-50" sec:authentication="name"></span>
+                       th:href="@{'/u/'+${#authentication.principal.username}}" data-toggle="dropdown">
+                        <span class="cust-navbar-dropdown" sec:authentication="name"></span>
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/u/tombear"
-                           th:href="@{'/u/' + ${#authentication.principal.username}}">
+                           th:href="@{'/u/'+${#authentication.principal.username}}">
                             个人主页
                         </a>
                         <a class="dropdown-item" href="/u/tombear/profile"
-                           th:href="@{'/u/' + ${#authentication.principal.username}} + '/profile'">
+                           th:href="@{'/u/'+${#authentication.principal.username}}+'/profile'">
                             个人设置
                         </a>
                     </div>
                 </div>
                 <div>
                     <a href="/u/tombear/blogs/edit"
-                       th:href="'/u/' + ${#authentication.principal.username} + '/blogs/edit'"
+                       th:href="'/u/'+${#authentication.principal.username}+'/blogs/edit'"
                        class="btn btn-outline-success my-2 my-sm-0">
                         写博客
                     </a>
