@@ -23,13 +23,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "zhangjihere";
 
-    @Qualifier("userServiceImpl")
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Qualifier("passwordEncoder")
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public SecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService,
+                          @Qualifier("passwordEncoder") PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @Bean("passwordEncoder")
