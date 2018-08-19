@@ -1,4 +1,4 @@
-package org.tombear.spring.boot.blog;
+package org.tombear.spring.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
