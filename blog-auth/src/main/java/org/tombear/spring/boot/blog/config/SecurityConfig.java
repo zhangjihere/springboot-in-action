@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean("passwordEncoder")
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {   // static signature prevent circular denpendency
 //        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return new BCryptPasswordEncoder(); // 使用BCrypt
     }
