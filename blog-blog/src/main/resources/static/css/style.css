@@ -1,0 +1,22 @@
+/*!
+* Override Bootstrap style.
+*
+* @since: 1.0.0
+* @author Way Lau <https://waylau.com>
+* @Modifier tombear
+*/
+
+/* header */
+.cust-navbar-dropdown {
+    display: inline-block;
+    padding-top: .3125rem;
+}
+
+
+.badge {
+  margin-left: auto; 
+}
+
+.hidden { 
+	display: none !important; 
+}
