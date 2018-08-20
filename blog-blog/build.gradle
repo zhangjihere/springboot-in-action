@@ -1,4 +1,4 @@
-// from blog-role
+// from blog-auth
 buildscript {// buildscript prior to execute in the code block
 
     ext { // ext, used to define dynamic attributes, and customize the specific dependency version
