@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  * @author tombear on 2018-08-12 23:45.
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // Enable method level security config
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "zhangjihere";
