@@ -3,6 +3,7 @@ package org.tombear.spring.boot.blog.controller;
 import com.google.common.collect.Lists;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,15 @@ public class MainController {
 
     private final UserService userService;
     private final AuthorityService authorityService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MainController(UserService userService, AuthorityService authorityService) {
+    public MainController(UserService userService,
+                          AuthorityService authorityService,
+                          PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -78,6 +83,7 @@ public class MainController {
         List<Authority> authorities = Lists.newArrayList();
         authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID).orElse(null));
         user.setUserAuthorities((authorities));
+        user.setEncodePassword(passwordEncoder.encode(user.getPassword()));
         userService.registerUser(user);
         return "redirect:/login";
     }

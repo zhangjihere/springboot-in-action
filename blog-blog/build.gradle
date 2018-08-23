@@ -52,6 +52,7 @@ dependencies {
     compile 'org.projectlombok:lombok:1.18.2'   // dependency used in test step
     compile "com.google.guava:guava:${guavaVersion}"
     compile("org.apache.commons:commons-lang3:3.7")
+    compile("es.nitaur.markdown:txtmark:0.16")  // Markdown parser dependency
 
     compile("mysql:mysql-connector-java:8.0.12")
     runtime("com.h2database:h2:1.4.197")

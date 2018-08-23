@@ -109,4 +109,11 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    /**
+     * 设置加密密码
+     */
+    public void setEncodePassword(String encodePassword) {
+        this.password = encodePassword;
+    }
 }

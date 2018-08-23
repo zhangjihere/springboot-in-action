@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  * @author tombear on 2018-08-12 23:45.
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // Enable method level security config
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String KEY = "zhangjihere";
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean("passwordEncoder")
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {   // static signature prevent circular dependency
 //        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return new BCryptPasswordEncoder(); // 使用BCrypt
     }

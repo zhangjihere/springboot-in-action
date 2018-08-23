@@ -1,7 +1,6 @@
 package org.tombear.spring.boot.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -74,6 +73,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByNameLike(name, pageable);
     }
 
+    /**
+     * implement method from UserDetailsService
+     *
+     * @param username alike account
+     * @return UserDetails
+     * @throws UsernameNotFoundException springsecurity core exception
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
