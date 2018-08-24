@@ -2,6 +2,7 @@ package org.tombear.spring.boot.blog.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.tombear.spring.boot.blog.domain.User;
 
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
  *
  * @author tombear on 2018-08-12 16:35.
  */
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     /**
      * create/edit/save user
