@@ -83,9 +83,10 @@ public class FileController {
     }
 
     /**
-     * view file
+     * view file online
      */
     @GetMapping("/view/{id}")
+    @ResponseBody
     public ResponseEntity<?> viewFileOnline(@PathVariable String id) {
         Optional<File> f = fileService.getFileById(id);
         if (f.isPresent()) {
@@ -104,8 +105,8 @@ public class FileController {
      * upload
      */
     @PostMapping("/")
-    @ResponseBody
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        System.out.println("FileController.handleFileUpload, file = [" + file + "], redirectAttributes = [" + redirectAttributes + "]");
         try {
             File f = new File(null, file.getOriginalFilename(), file.getContentType(), file.getSize(), null, Utils.getMD5(file.getInputStream()), new Binary(file.getBytes()), null);
             fileService.saveFile(f);
@@ -124,6 +125,7 @@ public class FileController {
     @PostMapping("/uploadFile")
     @ResponseBody
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+        System.out.println("FileController.handleFileUpload, file = [" + file + "]");
         File returnFile;
         try {
             File f = new File(null, file.getOriginalFilename(), file.getContentType(), file.getSize(), null, Utils.getMD5(file.getInputStream()), new Binary(file.getBytes()), null);
