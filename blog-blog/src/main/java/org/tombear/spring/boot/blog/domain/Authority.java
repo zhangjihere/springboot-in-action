@@ -8,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * <P>The entity represent authority</P>
@@ -20,16 +17,14 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor()
 public class Authority implements GrantedAuthority {
     private static final long serialVersionUID = 4304353156012280467L;
 
-    @Id // 主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
-    private Long id;    // 用户唯一标识
+    @Id // primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment
+    private Long id;    // authority primary key
 
-    @Column(nullable = false)   // 映射为字段，值不能为空
+    @Column(nullable = false)   // mapped to filed, value not empty
     private String name;
 
     @Override

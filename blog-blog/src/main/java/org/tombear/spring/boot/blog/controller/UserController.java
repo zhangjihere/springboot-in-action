@@ -72,7 +72,7 @@ public class UserController {
     @GetMapping("/add")
     public ModelAndView createForm(Model model) {
         System.out.println("UserController.createForm");
-        model.addAttribute("user", new User(null, null, null, null, null, "", null));
+        model.addAttribute("user", new User(null, null, null,null));
         model.addAttribute("title", "创建用户");
         return new ModelAndView("users/add", "userModel", model);
     }

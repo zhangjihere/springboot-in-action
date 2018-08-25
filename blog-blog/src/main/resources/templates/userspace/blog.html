@@ -13,56 +13,43 @@
 
             <!-- Blog Post -->
             <div class="card mb-4">
-                <div class="card-block">
+                <div class="card-block" th:object="${blogModel}">
                     <h2 class="card-title">
 						<span>
-                            <a href="/u/tombear" title="tombear"
-                               th:href="'/u/' + ${blogModel.user.username}"
-                               th:title="${blogModel.user.username}"> <img
-                                    src="/static/images/avatar_defualt.jpeg"
-                                    th:src="${blogModel.user.avatar} == null? '/images/avatar_defualt.jpeg': ${blogModel.user.avatar}"
-                                    class="blog-avatar-50">
+                            <a href="/u/tombear" title="tombear" th:href="'/u/' + *{user.username}" th:title="*{user.username}">
+                                <img src="/static/images/avatar_defualt.jpeg" th:src="*{user.avatar} == null? '/images/avatar_defualt.jpeg': *{user.avatar}" class="blog-avatar-50">
                             </a>
 						</span>
-                        <a href="/u/tombear/blogs/1" class="card-link" title="tombear"
-                           th:href="'/u/' + ${blogModel.user.username} + '/blogs/'+ ${blogModel.id}"
-                           th:title="${blogModel.user.username}" th:text="${blogModel.title}">
+                        <a href="/u/tombear/blogs/1" class="card-link" title="tombear" th:href="'/u/' + *{user.username} + '/blogs/'+ *{id}" th:title="*{user.username}" th:text="*{title}">
                             OAuth 2.0 认证的原理与实践
                         </a>
                     </h2>
                     <div class="card-text">
-                        <a href="/u/tombear" th:href="'/u/' + ${blogModel.user.username}"
-                           class="card-link" th:text="${blogModel.user.username}">
+                        <a href="/u/tombear" th:href="'/u/' + *{user.username}" class="card-link" th:text="*{user.username}">
                             tombear
                         </a>
-                        发表于 [[${#dates.format(blogModel.createTime, 'yyyy-MM-dd
-                        HH:mm')}]]
-                        <i class="fa fa-eye" aria-hidden="true">[[${blogModel.readSize}]]</i>
-                        <i class="fa fa-heart-o" aria-hidden="true">[[${blogModel.voteSize}]]</i>
-                        <i class="fa fa-comment-o" aria-hidden="true">[[${blogModel.commentSize}]]</i>
-                        <a href="/u/tombear" th:if="${isBlogOwner}"
-                           th:href="'/u/' + ${blogModel.user.username}+ '/blogs/edit/'+ ${blogModel.id}"
-                           class="btn btn-primary float-right">
+                        发表于 [[${#dates.format(blogModel.createTime, 'yyyy-MM-dd HH:mm')}]]
+                        <i class="fa fa-eye" aria-hidden="true">[[*{readSize}]]</i>
+                        <i class="fa fa-heart-o" aria-hidden="true">[[*{voteSize}]]</i>
+                        <i class="fa fa-comment-o" aria-hidden="true">[[*{commentSize}]]</i>
+                        <a href="/u/tombear" th:if="${isBlogOwner}" th:href="'/u/' + *{user.username}+ '/blogs/edit/'+ *{id}" class="btn btn-primary float-right">
                             编辑
                         </a>
-                        <a href="javascript:void(0)" th:if="${isBlogOwner}"
-                           class="btn btn-primary float-right blog-delete-blog">
+                        <a href="javascript:void(0)" th:if="${isBlogOwner}" class="btn btn-primary float-right blog-delete-blog">
                             删除
                         </a>
                     </div>
                     <hr>
-                    <article class="post-content" th:utext="${blogModel.htmlContent}">
-
+                    <article class="post-content" th:utext="*{htmlContent}">
+                        ...
                     </article>
                     <hr>
                 </div>
 
                 <div class="card-block">
-
                     <h5>分类：
                         <a href="/u/tombear/blogs?category=11">Spring Data</a>
                     </h5>
-
                     <h5>标签：
                         <a href="/u/tombear/blogs?keyword=分布式"><span class="badge badge-default">Web Design</span></a>
                         <a href="/u/tombear/blogs?keyword=分布式"><span class="badge badge-default">Jersey</span></a>
@@ -70,7 +57,6 @@
                         <a href="/u/tombear/blogs?keyword=分布式"><span class="badge badge-default">CSS</span></a>
                         <a href="/u/tombear/blogs?keyword=分布式"><span class="badge badge-default">Java</span></a>
                         <a href="/u/tombear/blogs?keyword=分布式"><span class="badge badge-default">Freebies</span></a>
-
                     </h5>
                 </div>
 
@@ -92,13 +78,12 @@
                         <h2 class="card-title col-lg-1 col-md-2">
 							<span>
 			                  <a href="/u/tombear" title="tombear">
-			                    <img src="https://avatars2.githubusercontent.com/u/21475596?s=460&v=4"
-                                     class="blog-avatar-50" alt="tombear">
+			                    <img src="https://avatars2.githubusercontent.com/u/21475596?s=460&v=4" class="blog-avatar-50" alt="tombear">
 			                  </a>
 					        </span>
                         </h2>
                         <div class="card-text col-lg-11 col-md-10">
-                            <a href="/u/tombear" class="card-link">tombear</a> 1楼 2017-03-17 14:20
+                            <a href="/u/tombear" class="card-link">tombear</a> 1楼 2018-08-25 23:20
                             <p>不错哦，顶起！</p>
                         </div>
                     </div>
@@ -131,8 +116,10 @@
 <!-- JavaScript -->
 <script th:inline="javascript">
     var blogId = [[${blogModel.id}]];
-    var blogUrl = '/u/' + [[${blogModel.user.username}]] + '/blogs/' + [[${blogModel.id}]];
+    var username = [[${blogModel.user.username}]];
+    blogUrl = '/u/' + username + '/blogs/' + blogId; // will be used in userspace/blog.js
 </script>
 <script src="../../static/js/userspace/blog.js" th:src="@{/js/userspace/blog.js}"></script>
+
 </body>
 </html>

@@ -23,20 +23,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * <P>
- * 用户实体 User Entity including authority
- * </P>
+ * <P>User Entity including authority</P>
  *
  * @author tombear on 2018-07-24 21:59.
  */
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = {"password", "avatar", "userAuthorities"})
 @Entity
 public class User implements UserDetails {
     private static final long serialVersionUID = -473324488593470975L;
@@ -45,22 +43,22 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto incremental
     private Long id; // entity only identity
 
-    @NotEmpty(message = "姓名不能为空")
+    @NotEmpty(message = "name not empty")
     @Size(min = 2, max = 20)
     @Column(nullable = false, length = 20) // map to field and value not null
     private String name;
 
-    @NotEmpty(message = "邮箱不能为空")
+    @NotEmpty(message = "email not empty")
     @Size(max = 50)
     @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-    @NotEmpty(message = "账号不能为空")
+    @NotEmpty(message = "username not empty")
     @Size(min = 3, max = 20)
     @Column(nullable = false, length = 20, unique = true)
     private String username; // user account, only identity for login
 
-    @NotEmpty(message = "密码不能为空")
+    @NotEmpty(message = "password not empty")
     @Size(max = 100)
     @Column(length = 100)
     private String password; // password for login
@@ -73,6 +71,14 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> userAuthorities;
+
+
+    public User(String name, String email, String username, String password) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 
     /**
      * Returns the userAuthorities granted to the user. Cannot return <code>null</code>.
@@ -111,7 +117,7 @@ public class User implements UserDetails {
     }
 
     /**
-     * 设置加密密码
+     * set encoded password
      */
     public void setEncodePassword(String encodePassword) {
         this.password = encodePassword;

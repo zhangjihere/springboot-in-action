@@ -5,19 +5,14 @@
 <body>
 <!-- Page Content -->
 <div class="container blog-content-container">
-
     <div class="row">
-
         <!-- 左侧栏目 -->
         <div class="col-md-4 col-xl-3">
-
             <div class="row">
                 <div class="col-md-12">
                     <span>
-                        <a href="/u/tombear" th:href="'/u/'+${user.username}" title="tombear"
-                           th:title="${user.username}">
-                            <img th:src="${user.avatar}==null?'/images/avatar_defualt.jpeg':${user.avatar} "
-                                 class="blog-avatar-230">
+                        <a href="/u/tombear" th:href="'/u/'+${user.username}" title="tombear" th:title="${user.username}">
+                            <img th:src="${user.avatar}==null?'/images/avatar_defualt.jpeg':${user.avatar} " class="blog-avatar-230">
 						</a>
                     </span>
                 </div>
@@ -28,19 +23,16 @@
                     <h4 class="card-text" th:text="${user.username}">tombear</h4>
                 </div>
             </div>
-
-
             <div class="row ">
                 <div class="col-md-12">
                     <h5>
                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        <a href="mailto:zhangjihere@hotmail.com" th:href="'mailto:'+ ${user.email}"
-                           th:text="${user.email}">zhangjihere@hotmail.com
+                        <a href="mailto:zhangjihere@hotmail.com" th:href="'mailto:'+ ${user.email}" th:text="${user.email}">
+                            zhangjihere@hotmail.com
                         </a>
                     </h5>
                 </div>
             </div>
-
             <hr>
 
             <!-- 分类 -->
@@ -68,30 +60,23 @@
             </div>
         </div>
 
-        <!-- 右侧栏目 -->
+        <!-- 右侧栏目 right column -->
         <div class="col-md-8 col-xl-9">
             <!-- 工具栏 -->
             <ul class="nav nav-tabs mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link " data-th-classappend="${order} eq 'new' ? 'active' : ''"
-                       href="javascript:void(0)"
-                       th:attr="url='/u/'+${user.username}+'/blogs?order=new'">
+                    <a class="nav-link " data-th-classappend="${order} eq 'new' ? 'active' : ''" href="javascript:void(0)" th:attr="url='/u/'+${user.username}+'/blogs?order=new'">
                         最新
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-th-classappend="${order} eq 'hot'?'active':''"
-                       href="javascript:void(0)"
-                       th:attr="url='/u/'+${user.username}+'/blogs?order=hot'">
+                    <a class="nav-link" data-th-classappend="${order} eq 'hot'?'active':''" href="javascript:void(0)" th:attr="url='/u/'+${user.username}+'/blogs?order=hot'">
                         最热
                     </a>
                 </li>
-
                 <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="搜索"
-                           id="keyword" th:value="${keyword}">
-                    <a href="javascript:void(0)" class="btn btn-outline-secondary my-2 my-sm-0"
-                       id="searchBlogs">
+                    <input class="form-control mr-sm-2" type="text" placeholder="搜索" id="keyword" th:value="${keyword}">
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary my-2 my-sm-0" id="searchBlogs">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </a>
                 </form>
@@ -103,9 +88,7 @@
                     <div class="card mb-4" th:each="blog : ${blogList}">
                         <div class="card-block">
                             <h2 class="card-title">
-                                <a href="/u/tombear/blogs/1" class="card-link" title="tombear"
-                                   th:href="'/u/' + ${blog.user.username} + '/blogs/'+ ${blog.id}"
-                                   th:title="${blog.user.username}" th:text="${blog.title}">
+                                <a href="/u/tombear/blogs/1" class="card-link" title="tombear" th:href="'/u/' + ${blog.user.username} + '/blogs/'+ ${blog.id}" th:title="${blog.user.username}" th:text="${blog.title}">
                                     OAuth 2.0 认证的原理与实践
                                 </a>
                             </h2>
@@ -122,11 +105,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div th:replace="~{fragments/page :: page}">...</div>
                 </div>
             </div><!-- /Blog Post -->
-        </div>
+        </div><!-- right column -->
     </div><!-- /.row -->
 </div><!-- /.container -->
 
@@ -137,5 +119,6 @@
     var username = [[${user.username}]];
 </script>
 <script src="../../static/js/userspace/u.js" th:src="@{/js/userspace/u.js}"></script>
+
 </body>
 </html>
