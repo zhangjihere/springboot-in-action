@@ -12,7 +12,7 @@
     <meta name="_csrf_header" th:content="${_csrf.getHeaderName()}"/>
 
     <!-- Tether core CSS http://tether.io/ -->
-    <link href="../../static/css/tether.min.css" th:href="@{/css/teher.min.css}" rel="stylesheet"/>
+    <link href="../../static/css/tether.min.css" th:href="@{/css/tether.min.css}" rel="stylesheet"/>
 
     <!-- Bootstrap CSS https://getbootstrap.com/docs/4.1/getting-started/download/ -->
     <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
@@ -27,7 +27,7 @@
     <link href="../../static/css/thinker-md.vendor.css" th:href="@{/css/thinker-md.vendor.css}" rel="stylesheet"/>
 
     <!-- bootstrap tags CSS https://github.com/xoxco/jQuery-Tags-Input -->
-    <link href="../../static/css/jquery.tagsinput.min.css" th:href="@{/css/jquery.taginput.min.css}" rel="stylesheet"/>
+    <link href="../../static/css/jquery.tagsinput.min.css" th:href="@{/css/jquery.tagsinput.min.css}" rel="stylesheet"/>
 
     <!-- bootstrap chosen CSS https://github.com/haubek/bootstrap4c-chosen -->
     <link href="../../static/css/component-chosen.min.css" th:href="@{/css/component-chosen.min.css}"/>
@@ -46,17 +46,17 @@
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-expand-md">
     <div class="container">
-        <button class="navbar-toggler navbar-toggle-right" type="button" data-toggle="collapse"
-                data-target="#navbarsContainer"
-                aria-controls="navbarsExampleContainer" aria-expanded="false"
-                aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggle-right" type="button" data-toggle="collapse" data-target="#navbarsContainer"
+                aria-controls="navbarsExampleContainer" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/" th:href="@{~/}">NewStarBlog</a>
         <div class="collapse navbar-collapse" id="navbarsContainer">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/blogs?order=new">最新<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/blogs?order=new">
+                        最新<span class="sr-only">(current)</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/blogs?order=hot">最热</a>
@@ -71,25 +71,20 @@
 
             <div sec:authorize="isAuthenticated()" class="row">
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="/u/tombear"
-                       th:href="@{'/u/'+${#authentication.principal.username}}" data-toggle="dropdown">
+                    <a class="dropdown-toggle" href="/u/tombear" th:href="@{'/u/'+${#authentication.principal.username}}" data-toggle="dropdown">
                         <span class="cust-navbar-dropdown" sec:authentication="name"></span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/u/tombear"
-                           th:href="@{'/u/'+${#authentication.principal.username}}">
+                        <a class="dropdown-item" href="/u/tombear" th:href="@{'/u/'+${#authentication.principal.username}}">
                             个人主页
                         </a>
-                        <a class="dropdown-item" href="/u/tombear/profile"
-                           th:href="@{'/u/'+${#authentication.principal.username}}+'/profile'">
+                        <a class="dropdown-item" href="/u/tombear/profile" th:href="@{'/u/'+${#authentication.principal.username}}+'/profile'">
                             个人设置
                         </a>
                     </div>
                 </div>
                 <div>
-                    <a href="/u/tombear/blogs/edit"
-                       th:href="'/u/'+${#authentication.principal.username}+'/blogs/edit'"
-                       class="btn btn-outline-success my-2 my-sm-0">
+                    <a href="/u/tombear/blogs/edit" th:href="'/u/'+${#authentication.principal.username}+'/blogs/edit'" class="btn btn-outline-success my-2 my-sm-0">
                         写博客
                     </a>
                 </div>
@@ -97,7 +92,6 @@
                     <input class="btn btn-outline-success" type="submit" value="退出">
                 </form>
             </div>
-
             <div sec:authorize="isAnonymous()">
                 <a href="/login" class="btn btn-outline-success my-2 my-sm-0" type="">登录</a>
                 <a href="/register" class="btn btn-outline-success my-2 my-sm-0" type="">注册</a>
