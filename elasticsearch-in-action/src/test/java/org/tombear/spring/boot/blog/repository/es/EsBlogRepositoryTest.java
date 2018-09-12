@@ -34,6 +34,9 @@ public class EsBlogRepositoryTest {
         esBlogRepository.save(new EsBlog("When you are old",
                 "When you are old and grey and full of sleep",
                 "And ndding by the fire, take down this book."));
+        esBlogRepository.save(new EsBlog("Json Title",
+                "sumary for json",
+                "{\"span\":\"f123456\",\"servity\":\"No.1\"}"));
     }
 
     @Test
@@ -45,23 +48,29 @@ public class EsBlogRepositoryTest {
         String content = "down";
 
         Page<EsBlog> page = esBlogRepository.findByTitleContainingOrSummaryContainingOrContentContaining(title, summary, content, pageable);
-
-        System.out.println("----------start 1");
-        for (EsBlog blog : page) {
-            System.out.println(blog.toString());
-        }
-        System.out.println("----------end 1");
+        printPage(page, 1);
 
         title = "the";
         summary = "the";
         content = "the";
 
         page = esBlogRepository.findByTitleContainingOrSummaryContainingOrContentContaining(title, summary, content, pageable);
+        printPage(page, 2);
 
-        System.out.println("----------start 2");
-        for (EsBlog blog : page) {
-            System.out.println(blog.toString());
+
+        title = "abc";
+        summary = "for json";
+        content = "\"span\":\"f123456\"";
+
+        page = esBlogRepository.findByTitleContainingOrSummaryContainingOrContentContaining(title, summary, content, pageable);
+        printPage(page, 3);
+    }
+
+    public void printPage(Page<EsBlog> page, int index) {
+        System.out.println("----------start " + index);
+        for (EsBlog esBlog : page) {
+            System.out.println(esBlog.toString());
         }
-        System.out.println("----------end 2");
+        System.out.println("----------end " + index);
     }
 }
