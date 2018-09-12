@@ -34,9 +34,12 @@ public class EsBlogRepositoryTest {
         esBlogRepository.save(new EsBlog("When you are old",
                 "When you are old and grey and full of sleep",
                 "And ndding by the fire, take down this book."));
-        esBlogRepository.save(new EsBlog("Json Title",
-                "sumary for json",
+        esBlogRepository.save(new EsBlog("Json Title1",
+                "summary for json1",
                 "{\"span\":\"f123456\",\"servity\":\"No.1\"}"));
+        esBlogRepository.save(new EsBlog("Json Title2",
+                "summary for json2",
+                "{\"span\":\"k654321\",\"servity\":\"No.2\"}"));
     }
 
     @Test
